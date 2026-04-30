@@ -1332,15 +1332,15 @@
         <div class="section-line"></div>
     </div>
     <div class="contact-grid">
-        <div class="contact-card fade-in" onclick="copyToClipboard('15138281265', '电话')">
+        <div class="contact-card fade-in" onclick="copyToClipboard(decodeContact('phone'), '电话')">
             <div class="contact-icon">📱</div>
             <div class="contact-label">联系电话</div>
-            <div class="contact-value">15138281265</div>
+            <div class="contact-value" id="phone-display"></div>
         </div>
-        <div class="contact-card fade-in" onclick="copyToClipboard('zhu901088714@163.com', '邮箱')">
+        <div class="contact-card fade-in" onclick="copyToClipboard(decodeContact('email'), '邮箱')">
             <div class="contact-icon">✉️</div>
             <div class="contact-label">电子邮箱</div>
-            <div class="contact-value">zhu901088714@163.com</div>
+            <div class="contact-value" id="email-display"></div>
         </div>
         <div class="contact-card fade-in">
             <div class="contact-icon">📍</div>
@@ -1496,6 +1496,21 @@ function animateCount(el, start, end, duration, suffix) {
     }
     requestAnimationFrame(update);
 }
+
+// ====== 防爬虫联系方式解码 ======
+// 联系方式通过编码存储，运行时动态解码，防止爬虫直接抓取
+const _c = {
+    phone: [49,53,49,51,56,50,56,49,50,54,53],  // ASCII encoded
+    email: [122,104,117,57,48,49,48,56,56,55,49,52,64,49,54,51,46,99,111,109]
+};
+
+function decodeContact(type) {
+    return _c[type].map(c => String.fromCharCode(c)).join('');
+}
+
+// 页面加载时动态填充联系方式
+document.getElementById('phone-display').textContent = decodeContact('phone');
+document.getElementById('email-display').textContent = decodeContact('email');
 
 // ====== 菜单切换 ======
 function toggleMenu() {
