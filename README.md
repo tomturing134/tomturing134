@@ -1,57 +1,26 @@
-# 朱亚鹏 - 个人简历网站
+# 👋 Hi, I'm Zhu Yapeng (朱亚鹏)
 
-基于简历内容创建的交互式个人简历网站。
+🎓 计算机技术硕士 | 💻 软件工程师 | 🔍 质量保障
 
-## 预览
+---
 
-打开 [index.html](index.html) 即可查看。
+### 🌐 My Resume Website
 
-## 部署到 GitHub Pages
+👉 **[View My Interactive Resume →](https://tomturing134.github.io/tomturing134/)**
 
-### 方式一：创建新仓库部署
+---
 
-1. 在 GitHub 上创建新仓库，名称推荐 `zhu-yapeng-resume` 或 `username.github.io`
-2. 将本项目文件推送到仓库：
-   ```bash
-   cd C:\Users\zhangyicong2\WorkBuddy\20260430215608
-   git init
-   git add index.html image.png .nojekyll .gitignore README.md
-   git commit -m "Initial commit: 交互式简历网站"
-   git branch -M main
-   git remote add origin https://github.com/<你的用户名>/<仓库名>.git
-   git push -u origin main
-   ```
-3. 进入仓库 Settings → Pages → Source 选择 `main` 分支 → Save
-4. 等待1-2分钟，访问 `https://<你的用户名>.github.io/<仓库名>/`
+### 📋 Quick Profile
 
-### 方式二：使用 username.github.io（专属域名）
+- 🎓 河南大学软件工程本科 → 江苏大学计算机技术硕士
+- 💼 好未来-学而思产研组实习经历
+- 🧪 BCBA情感分析模型 · 97.26%准确率
+- 📜 鸿蒙开发者高级认证 | 英语六级
 
-1. 创建名为 `<你的用户名>.github.io` 的仓库
-2. 同上推送文件
-3. 自动部署到 `https://<你的用户名>.github.io/`
+### 🛠 Tech Stack
 
-## 文件结构
+`Python` `C/C++` `JavaScript` `Vue` `Postman` `MeterSphere`
 
-```
-├── index.html      # 主页面
-├── image.png       # 个人照片
-├── .nojekyll       # 禁用 Jekyll 处理
-├── .gitignore      # Git 忽略规则
-└── README.md       # 说明文档
-```
+---
 
-## 技术栈
-
-- 纯 HTML / CSS / JavaScript
-- 无第三方依赖
-- 响应式设计，适配桌面和移动端
-
-## 功能
-
-- 粒子连线动态背景
-- 滚动渐显动画
-- 技能条填充动画
-- 数据递增动画
-- 导航栏自动高亮
-- 联系方式一键复制
-- 返回顶部按钮
+> 💡 细心从每一个细节开始
