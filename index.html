@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>朱亚鹏 | 个人简历</title>
+    <title>朱亚鹏 | 计算机技术硕士 · 软件工程师 · 质量保障</title>
+    <meta name="description" content="朱亚鹏，江苏大学计算机技术硕士，河南大学软件工程本科，擅长软件测试与质量保障，具备深度学习研究经验。">
+    <meta name="keywords" content="朱亚鹏,软件工程师,QA,测试工程师,简历,深度学习">
+    <meta property="og:title" content="朱亚鹏 | 个人简历">
+    <meta property="og:description" content="计算机技术硕士 · 软件工程师 · 质量保障">
+    <meta property="og:image" content="photo.png">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://tomturing134.github.io/tomturing134/">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
 
@@ -1089,6 +1096,7 @@
         <p class="hero-tagline">细心从每一个细节开始</p>
         <div class="hero-cta">
             <a href="#experience" class="btn btn-primary">查看经历 ↓</a>
+            <a href="https://github.com/tomturing134/tomturing134/raw/main/resume.pdf" class="btn btn-outline" target="_blank">下载 PDF 📄</a>
             <a href="#contact" class="btn btn-outline">联系我 ✉</a>
         </div>
     </div>
@@ -1218,15 +1226,15 @@
             </div>
             <div class="metric-grid">
                 <div class="metric-item">
-                    <div class="metric-value"><span class="count-up" data-target="97.26">0</span>%</div>
+                    <div class="metric-value"><span class="count-up" data-target="97.26" data-decimals="2">97.26</span>%</div>
                     <div class="metric-label">BCBA模型准确率</div>
                 </div>
                 <div class="metric-item">
-                    <div class="metric-value"><span class="count-up" data-target="91.06">0</span>%</div>
+                    <div class="metric-value"><span class="count-up" data-target="91.06" data-decimals="2">91.06</span>%</div>
                     <div class="metric-label">专用词典准确率</div>
                 </div>
                 <div class="metric-item">
-                    <div class="metric-value">10<span class="count-up" data-target="0" data-suffix="万+">万+</span></div>
+                    <div class="metric-value">10万+</div>
                     <div class="metric-label">爬取评论数据量</div>
                 </div>
             </div>
@@ -1332,16 +1340,16 @@
         <div class="section-line"></div>
     </div>
     <div class="contact-grid">
-        <div class="contact-card fade-in" onclick="copyToClipboard(decodeContact('phone'), '电话')">
+        <a class="contact-card fade-in" id="phone-card" href="javascript:void(0)" onclick="copyToClipboard(decodeContact('phone'), '电话')">
             <div class="contact-icon">📱</div>
             <div class="contact-label">联系电话</div>
             <div class="contact-value" id="phone-display"></div>
-        </div>
-        <div class="contact-card fade-in" onclick="copyToClipboard(decodeContact('email'), '邮箱')">
+        </a>
+        <a class="contact-card fade-in" id="email-card" href="javascript:void(0)" onclick="copyToClipboard(decodeContact('email'), '邮箱')">
             <div class="contact-icon">✉️</div>
             <div class="contact-label">电子邮箱</div>
             <div class="contact-value" id="email-display"></div>
-        </div>
+        </a>
         <div class="contact-card fade-in">
             <div class="contact-icon">📍</div>
             <div class="contact-label">所在地</div>
@@ -1472,10 +1480,12 @@ const observer = new IntersectionObserver((entries) => {
             // 数字递增动画
             const countUps = entry.target.querySelectorAll('.count-up');
             countUps.forEach(el => {
+                if (el.dataset.animated) return;
+                el.dataset.animated = 'true';
                 const target = parseFloat(el.getAttribute('data-target'));
-                const suffix = el.getAttribute('data-suffix') || '';
+                const decimals = parseInt(el.getAttribute('data-decimals') || '0');
                 if (target > 0) {
-                    animateCount(el, 0, target, 1500, suffix);
+                    animateCount(el, 0, target, 1500, decimals);
                 }
             });
         }
@@ -1484,23 +1494,22 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-function animateCount(el, start, end, duration, suffix) {
+function animateCount(el, start, end, duration, decimals) {
     const startTime = performance.now();
     function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = start + (end - start) * eased;
-        el.textContent = current.toFixed(2) + suffix;
+        el.textContent = current.toFixed(decimals);
         if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
 }
 
 // ====== 防爬虫联系方式解码 ======
-// 联系方式通过编码存储，运行时动态解码，防止爬虫直接抓取
 const _c = {
-    phone: [49,53,49,51,56,50,56,49,50,54,53],  // ASCII encoded
+    phone: [49,53,49,51,56,50,56,49,50,54,53],
     email: [122,104,117,57,48,49,48,56,56,55,49,52,64,49,54,51,46,99,111,109]
 };
 
@@ -1508,9 +1517,15 @@ function decodeContact(type) {
     return _c[type].map(c => String.fromCharCode(c)).join('');
 }
 
-// 页面加载时动态填充联系方式
-document.getElementById('phone-display').textContent = decodeContact('phone');
-document.getElementById('email-display').textContent = decodeContact('email');
+// 页面加载时动态填充联系方式和链接
+(function() {
+    const phone = decodeContact('phone');
+    const email = decodeContact('email');
+    document.getElementById('phone-display').textContent = phone;
+    document.getElementById('email-display').textContent = email;
+    document.getElementById('phone-card').href = 'tel:' + phone;
+    document.getElementById('email-card').href = 'mailto:' + email;
+})();
 
 // ====== 菜单切换 ======
 function toggleMenu() {
